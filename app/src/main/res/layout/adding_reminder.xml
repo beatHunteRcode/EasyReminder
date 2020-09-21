@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="write your reminding here"
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
-            android:layout_gravity="center"
             android:background="@drawable/button_rectangle"
+            android:onClick="onSelectDateButtonClick"
             android:text="set date"
             android:textSize="30sp" />
 
@@ -53,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
-            android:layout_gravity="center"
             android:background="@drawable/button_rectangle"
             android:onClick="onSelectTimeButtonClick"
             android:text="set time"
@@ -65,7 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
-            android:layout_gravity="center"
             android:background="@drawable/button_rectangle"
             android:text="create"
             android:textSize="30sp" />
