@@ -1,9 +1,13 @@
 package com.beathunter.easyreminder
 
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 
-class NearestRemField {
-    val height = 122
-    val width = 182
-//    var text: TextView =
+class NearestRemField : AppCompatActivity() {
+
 }
