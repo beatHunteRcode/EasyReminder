@@ -2,9 +2,12 @@ package com.beathunter.easyreminder
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -19,6 +22,7 @@ import org.w3c.dom.NodeList
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.File
+import java.io.IOError
 import java.io.InputStream
 import java.util.*
 import javax.xml.parsers.DocumentBuilder
@@ -27,21 +31,54 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 class MainActivity : AppCompatActivity() {
 
+    val TAG : String = "lifecycle"
+
     private val mainScreen = R.layout.activity_main
     private val addingReminderScreen = R.layout.adding_reminder
     private val myRemindersScreen =  R.layout.my_reminders
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         getSupportActionBar()?.hide()
         setContentView(mainScreen)
 
-        val nodeList = parseXML("activity_main.xml")
-        printNodes(nodeList)
+        Log.d(TAG, "Activity onCreate(): created")
     }
 
-    fun onAddRemButtonClick(v: View) = setContentView(addingReminderScreen)
+    override fun onStart() {
+        super.onStart()
+
+        Log.d(TAG, "Activity onStart(): started")
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.d(TAG, "Activity onResume(): resumed")
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        Log.d(TAG, "Activity onPause(): paused")
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        Log.d(TAG, "Activity onStop(): stopped")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Log.d(TAG, "Activity onDestroy(): destroyed")
+    }
+
+    fun onAddRemButtonClick(v: View) {
+
+        setContentView(addingReminderScreen)
+    }
 
     fun onMyRemsButtonClick(v: View) = setContentView(myRemindersScreen)
 
@@ -84,18 +121,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onCreateButtonClick(v : View) {
-        val nodeList = parseXML("activity_main.xml")
+//        val nodeList = parseXML("activity_main.xml")
 
         //выходим из сцены создания напоминания и переключаемся на главное меню
         setContentView(mainScreen)
         //создаем виджет напоминания в главном меню в HorizontalScrollView
-//        createHelpReminder(R.id.hLinLayout, nodeList)
+        createHelpReminder(R.id.hLinLayout)
         //переключаемся на сцену со списком всех напоминаний, чтобы добавить напоминание и туда
-        setContentView(myRemindersScreen)
+//        setContentView(myRemindersScreen)
         //добавляем напоминание в общий список
 //        createHelpReminder(R.id.myrems_linlayout, nodeList)
         //возвращаемся на главное меню
-        setContentView(mainScreen)
+//        setContentView(mainScreen)
     }
 
     fun printNodes(nodeList: NodeList) {
@@ -107,14 +144,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun parseXML(fileName : String) : NodeList {
+    private fun parseXML(fileName : String) : NodeList {
+        val element : Element
+        var xmlFile : File = File("")
         val factory : DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
         val builder : DocumentBuilder = factory.newDocumentBuilder()
-        val document : Document = builder.parse(File(fileName))
-        val element : Element = document.documentElement
-
+        try {
+            xmlFile = File(fileName)
+        }
+        catch (e : IOError) {
+            println("No file " + fileName)
+        }
+        val document = builder.parse(xmlFile)
+        element = document.documentElement
         return element.childNodes
-
 //        val parserFactory : XmlPullParserFactory
 //        parserFactory = XmlPullParserFactory.newInstance()
 //        val parser : XmlPullParser = parserFactory.newPullParser()
@@ -124,7 +167,7 @@ class MainActivity : AppCompatActivity() {
 //        return parser
     }
 
-    fun createHelpReminder(layoutId : Int, nodeList: NodeList) {
+    fun createHelpReminder(layoutId : Int) {
         val mainLinLayout = findViewById<LinearLayout>(layoutId)
         mainLinLayout.childCount
         val inflater : LayoutInflater = LayoutInflater.from(this)
@@ -220,4 +263,14 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onBackPressed() = setContentView(mainScreen)
+
+//    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+//        super.onSaveInstanceState(outState, outPersistentState)
+//        outState.putInt("layout", R.id.content)
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        setContentView(savedInstanceState.getInt("layout"))
+//    }
 }

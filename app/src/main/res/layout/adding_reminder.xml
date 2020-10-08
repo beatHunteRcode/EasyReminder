@@ -40,35 +40,53 @@
 
         <Button
             android:id="@+id/set_date_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="30sp"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
-            android:background="@drawable/button_rectangle"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonshape"
             android:onClick="onSelectDateButtonClick"
             android:text="set date"
-            android:textSize="30sp" />
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"/>
 
         <Button
             android:id="@+id/set_time_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="30sp"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
-            android:background="@drawable/button_rectangle"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonshape"
             android:onClick="onSelectTimeButtonClick"
             android:text="set time"
-            android:textSize="30sp" />
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"/>
 
         <Button
             android:id="@+id/create_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
-            android:background="@drawable/button_rectangle"
+            android:background="@drawable/buttonshape"
             android:onClick="onCreateButtonClick"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
             android:text="create"
+            android:textColor="#000000"
             android:textSize="30sp" />
 
     </LinearLayout>
