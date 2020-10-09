@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_rem_main_constr_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/bg" />
+
+    <LinearLayout
+        android:id="@+id/lin1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="60dp"
+        android:paddingVertical="20dp">
+
+
+        <EditText
+            android:id="@+id/reminding_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="10"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="напишите своё напоминание здесь"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/set_date_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonshape"
+            android:onClick="onSelectDateButtonClick"
+            android:text="выбрать дату"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"/>
+
+        <Button
+            android:id="@+id/set_time_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonshape"
+            android:onClick="onSelectTimeButtonClick"
+            android:text="выбрать время"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"/>
+
+        <Button
+            android:id="@+id/create_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0"
+            android:background="@drawable/buttonshape"
+            android:onClick="onCreateButtonClick"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="создать"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
