@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
     private val addingReminderScreen = R.layout.adding_reminder
     private val myRemindersScreen =  R.layout.my_reminders
 
+    private val setDateButton = R.id.set_date_button
+    private val setTimeButton = R.id.set_time_button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
@@ -265,12 +268,18 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() = setContentView(mainScreen)
 
 //    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+//        setContentView(addingReminderScreen)
+//        outState.putString("time", findViewById<Button>(R.id.add_rem_button).text.toString())
+//        outState.putString("date", findViewById<Button>(setDateButton).text.toString())
+//
 //        super.onSaveInstanceState(outState, outPersistentState)
-//        outState.putInt("layout", R.id.content)
 //    }
 //
 //    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
 //        super.onRestoreInstanceState(savedInstanceState)
-//        setContentView(savedInstanceState.getInt("layout"))
+//
+//        findViewById<Button>(setTimeButton).text = savedInstanceState.getString("time")
+//        findViewById<Button>(setDateButton).text = savedInstanceState.getString("date")
+//        setContentView(mainScreen)
 //    }
 }
