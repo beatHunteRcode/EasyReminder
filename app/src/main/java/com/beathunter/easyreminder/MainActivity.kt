@@ -267,19 +267,19 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onBackPressed() = setContentView(mainScreen)
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        setContentView(addingReminderScreen)
-        outState.putString("time", findViewById<Button>(R.id.add_rem_button).text.toString())
-        outState.putString("date", findViewById<Button>(setDateButton).text.toString())
-
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        findViewById<Button>(setTimeButton).text = savedInstanceState.getString("time")
-        findViewById<Button>(setDateButton).text = savedInstanceState.getString("date")
-        setContentView(mainScreen)
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        setContentView(addingReminderScreen)
+//        outState.putString("time", findViewById<Button>(R.id.add_rem_button).text.toString())
+//        outState.putString("date", findViewById<Button>(setDateButton).text.toString())
+//
+//        super.onSaveInstanceState(outState)
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//
+//        findViewById<Button>(setTimeButton).text = savedInstanceState.getString("time")
+//        findViewById<Button>(setDateButton).text = savedInstanceState.getString("date")
+//        setContentView(mainScreen)
+//    }
 }
