@@ -13,7 +13,7 @@
     - вертикально `android:orientation="vertical"`
     - горизонтально `android:orientation="horizontal"`
 
-    ![Рис. 1 Сцена с использованием LinearLayout](./forlabs/lab1/1.png)<br>
+    ![Рис. 1 Сцена с использованием LinearLayout](https://github.com/beatHunteRbbx/EasyReminder/blob/master/forlabs/lab1/screenshots/1.png)<br>
     Рис. 1 Сцена с использованием LinearLayout
 
 
@@ -21,7 +21,7 @@
 
     **ConstraintLayout** – более сложное представление виджетов. **ConstraintLayout** позволяет более гибко настраивать дочерние элементы (не только вертикально/горизинтально). Для правильной настройки, дочернему элементу необходимо установить ограничения по вертикали и горизонтали (хотя бы по одному) – **constraints**.
 
-    ![Рис. 2 Сцена с использованием ConstraintLayout](./forlabs/lab1/1.png)<br>
+    ![Рис. 2 Сцена с использованием ConstraintLayout](https://github.com/beatHunteRbbx/EasyReminder/blob/master/forlabs/lab1/screenshots/2.png)<br>
     Рис. 2 Сцена с использованием ConstraintLayout
 
 
