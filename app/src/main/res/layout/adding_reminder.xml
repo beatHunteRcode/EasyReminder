@@ -26,7 +26,6 @@
         android:paddingHorizontal="60dp"
         android:paddingVertical="20dp">
 
-
         <EditText
             android:id="@+id/reminding_text"
             android:layout_width="match_parent"
