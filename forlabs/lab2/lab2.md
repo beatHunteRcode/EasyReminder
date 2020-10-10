@@ -1,0 +1,1 @@
+## Лабораторная работа №2. Activity Lifecycle. Alternative resources.
