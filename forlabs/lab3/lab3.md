@@ -9,3 +9,4 @@
 Изучены **Lifecycle-Aware** компоненты. Проделаны задания из [codelabs](https://developer.android.com/topic/libraries/architecture/lifecycle#codelabs).<br> 
 В результате работы получены новые знания:
 - **ViewModel** - новый способ сохранения состояния **Activity**
+- **LifecycleObserver** - интерфейс, который можно использовать при реализации класса, который имеет жизненный цикл в приложении - **Android Lifecycle**
