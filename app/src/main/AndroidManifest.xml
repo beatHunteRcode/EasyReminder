@@ -18,10 +18,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.AddingReminderActivity">
+            android:name=".Activities.AddingReminderActivity"
+            android:parentActivityName=".Activities.MainActivity">
         </activity>
         <activity
-            android:name=".Activities.MyRemindersActivity">
+            android:name=".Activities.MyRemindersActivity"
+            android:parentActivityName=".Activities.MainActivity">
+        </activity>
+        <activity
+            android:name=".Activities.FragmentsActivity">
         </activity>
     </application>
 
