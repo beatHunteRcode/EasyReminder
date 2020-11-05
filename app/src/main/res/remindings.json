@@ -1,0 +1,47 @@
+{
+    "remindings" : [
+        {
+            "text" : "android deadline",
+            "date" : "8.11.2020",
+            "time" : "12:30 PM"
+        },
+        {
+            "text" : "bread",
+            "date" : "12.12.2021",
+            "time" : "5:10 pm"
+        },
+        {
+            "text" : "driving",
+            "date" : "8.7.2020",
+            "time" : "12:23 AM"
+        },
+        {
+            "text" : "warzone",
+            "date" : "7.11.2020",
+            "time" : "10:03 AM"
+        },
+        {
+            "text" : "conquer the world",
+            "date" : "13.11.2020",
+            "time" : "11:20 AM"
+        },
+        {
+            "text" : "kotlin",
+            "date" : "23.11.2020",
+            "time" : "1:20 AM"
+        },
+        {
+            "text" : "university exam",
+            "date" : "10.1.2020",
+            "time" : "12:55 AM"
+        },
+        {
+            "text" : "writing code",
+            "date" : "10.10.2010",
+            "time" : "14:44 PM"
+        }
+    
+    ] 
+    
+
+}

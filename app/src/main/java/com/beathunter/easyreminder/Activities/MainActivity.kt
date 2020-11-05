@@ -8,8 +8,10 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.RecyclerView
 import com.beathunter.easyreminder.Fragments.BlankFragment
 import com.beathunter.easyreminder.R
+import com.beathunter.easyreminder.RemindersAdapter
 
 
 class MainActivity : AppCompatActivity() {
