@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beathunter.easyreminder.R
 import com.beathunter.easyreminder.RemindersAdapter
 import com.beathunter.easyreminder.ViewModels.AddingReminderViewModel
+import java.io.File
 
 class MyRemindersActivity : AppCompatActivity() {
 
     private lateinit var remsList : RecyclerView
     private lateinit var remsAdapter : RemindersAdapter
-    
+
+    lateinit var remindingsFile : File
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_reminders)
@@ -29,7 +32,9 @@ class MyRemindersActivity : AppCompatActivity() {
         val linearLayoutManager : LinearLayoutManager = LinearLayoutManager(this)
         remsList.layoutManager = linearLayoutManager
 
-        remsAdapter = RemindersAdapter(10)
+        remindingsFile = File("remindings.json")
+
+        remsAdapter = RemindersAdapter(4, remindingsFile)
         remsList.adapter = remsAdapter
     }
 

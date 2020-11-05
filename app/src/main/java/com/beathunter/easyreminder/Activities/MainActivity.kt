@@ -1,17 +1,16 @@
 package com.beathunter.easyreminder.Activities
 
-import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.recyclerview.widget.RecyclerView
-import com.beathunter.easyreminder.Fragments.BlankFragment
 import com.beathunter.easyreminder.R
-import com.beathunter.easyreminder.RemindersAdapter
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +43,61 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, FragmentsActivity::class.java)
             startActivity(intent)
         }
+
+        //создание файла с напоминаниями
+        val fOut: FileOutputStream = openFileOutput("remindings.json", Context.MODE_PRIVATE)
+        val osw = OutputStreamWriter(fOut)
+        val remsString = "{\n" +
+                "    \"remindings\" : [\n" +
+                "        {\n" +
+                "            \"text\" : \"android deadline\",\n" +
+                "            \"date\" : \"8.11.2020\",\n" +
+                "            \"time\" : \"12:30 PM\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"bread\",\n" +
+                "            \"date\" : \"12.12.2021\",\n" +
+                "            \"time\" : \"5:10 pm\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"driving\",\n" +
+                "            \"date\" : \"8.7.2020\",\n" +
+                "            \"time\" : \"12:23 AM\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"warzone\",\n" +
+                "            \"date\" : \"7.11.2020\",\n" +
+                "            \"time\" : \"10:03 AM\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"conquer the world\",\n" +
+                "            \"date\" : \"13.11.2020\",\n" +
+                "            \"time\" : \"11:20 AM\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"kotlin\",\n" +
+                "            \"date\" : \"23.11.2020\",\n" +
+                "            \"time\" : \"1:20 AM\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"university exam\",\n" +
+                "            \"date\" : \"10.1.2020\",\n" +
+                "            \"time\" : \"12:55 AM\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"text\" : \"writing code\",\n" +
+                "            \"date\" : \"10.10.2010\",\n" +
+                "            \"time\" : \"14:44 PM\"\n" +
+                "        }\n" +
+                "    \n" +
+                "    ] \n" +
+                "    \n" +
+                "\n" +
+                "}"
+        osw.write(remsString);
+
+        osw.flush();
+        osw.close();
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
