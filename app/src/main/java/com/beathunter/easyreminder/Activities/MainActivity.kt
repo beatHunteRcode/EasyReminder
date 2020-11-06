@@ -17,6 +17,13 @@ class MainActivity : AppCompatActivity() {
 
     val TAG : String = "lifecycle"
     val REQUEST_CODE_ADD_REM = 1
+    //shared preferences
+    //sqllite (room)
+    //файлы. internal storage
+
+
+    //3. выводы + navgraph
+    //navhost - что будет при переходе на другой фрагмент
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

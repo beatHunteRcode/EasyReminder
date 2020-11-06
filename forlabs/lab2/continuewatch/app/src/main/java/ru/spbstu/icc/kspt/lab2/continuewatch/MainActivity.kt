@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+    //как избавится от лишнего треда
+    //что происходит, если мы все таки обратимся к secondsElapsed, минуя if
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
