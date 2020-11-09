@@ -2,12 +2,17 @@ package com.beathunter.easyreminder.Activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import com.beathunter.easyreminder.QuickSort
 import com.beathunter.easyreminder.R
+import com.beathunter.easyreminder.Reminder
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
@@ -17,13 +22,19 @@ class MainActivity : AppCompatActivity() {
 
     val TAG : String = "lifecycle"
     val REQUEST_CODE_ADD_REM = 1
-    //shared preferences
-    //sqllite (room)
-    //файлы. internal storage
+    private val FILE_NAME = "reminders.json"
+    private lateinit var sPref : SharedPreferences
+    private val JSON_REMINDINGS_FILE_PATH = "JSON_reminders_file_path"
+    private var numbElements = 0
 
+    private lateinit var node : JsonNode
+    private lateinit var datesList : List<JsonNode>
+    private lateinit var timesList : List<JsonNode>
+    private lateinit var textsList : List<JsonNode>
 
-    //3. выводы + navgraph
-    //navhost - что будет при переходе на другой фрагмент
+    companion object {
+        lateinit var FILE_PATH : String
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         val addRemButton = findViewById<Button>(R.id.add_rem_button)
         addRemButton.setOnClickListener {
             val intent: Intent = Intent(this, AddingReminderActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            startActivityForResult(intent, REQUEST_CODE_ADD_REM)
+            startActivity(intent)
+            finish()
         }
 
         val myRemsButton = findViewById<Button>(R.id.my_rems_button)
@@ -49,77 +60,14 @@ class MainActivity : AppCompatActivity() {
         nearest.setOnClickListener {
             val intent: Intent = Intent(this, FragmentsActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
-        //создание файла с напоминаниями
-        val fOut: FileOutputStream = openFileOutput("remindings.json", Context.MODE_PRIVATE)
-        val osw = OutputStreamWriter(fOut)
-        val remsString = "{\n" +
-                "    \"remindings\" : [\n" +
-                "        {\n" +
-                "            \"text\" : \"android deadline\",\n" +
-                "            \"date\" : \"8.11.2020\",\n" +
-                "            \"time\" : \"12:30 PM\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"bread\",\n" +
-                "            \"date\" : \"12.12.2021\",\n" +
-                "            \"time\" : \"5:10 pm\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"driving\",\n" +
-                "            \"date\" : \"8.7.2020\",\n" +
-                "            \"time\" : \"12:23 AM\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"warzone\",\n" +
-                "            \"date\" : \"7.11.2020\",\n" +
-                "            \"time\" : \"10:03 AM\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"conquer the world\",\n" +
-                "            \"date\" : \"13.11.2020\",\n" +
-                "            \"time\" : \"11:20 AM\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"kotlin\",\n" +
-                "            \"date\" : \"23.11.2020\",\n" +
-                "            \"time\" : \"1:20 AM\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"university exam\",\n" +
-                "            \"date\" : \"10.1.2020\",\n" +
-                "            \"time\" : \"12:55 AM\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"text\" : \"writing code\",\n" +
-                "            \"date\" : \"10.10.2010\",\n" +
-                "            \"time\" : \"14:44 PM\"\n" +
-                "        }\n" +
-                "    \n" +
-                "    ] \n" +
-                "    \n" +
-                "\n" +
-                "}"
-        osw.write(remsString);
-
-        osw.flush();
-        osw.close();
+        createJSONFile()
+        initNearestRems()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (data == null) return
-
-        val dateText = data.getStringExtra("dateText")
-        val timeText = data.getStringExtra("timeText")
-        val remText = data.getStringExtra("remText")
-
-        createNearestReminding(dateText!!, timeText!!, remText!!)
-    }
-
-    private fun createNearestReminding(dateText : String, timeText : String, remText : String) {
+    private fun createNearestReminding(remText : String, dateText : String, timeText : String) {
         val mainLinLayout = findViewById<LinearLayout>(R.id.hLinLayout)
 
         val constraintLayout = ConstraintLayout(this)
@@ -130,24 +78,24 @@ class MainActivity : AppCompatActivity() {
         constraintLayout.id = mainLinLayout.childCount + 1 + 1
         val set : ConstraintSet = ConstraintSet()
 
-        val button = Button(this)
-        constraintLayout.addView(button)
+        val textView = TextView(this)
+        constraintLayout.addView(textView)
         val buttonParams = ConstraintLayout.LayoutParams(
             0, ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
         buttonParams.dimensionRatio = "4:5"
         buttonParams.marginEnd = 20
         buttonParams.marginStart = 20
-        button.layoutParams = buttonParams
-        button.background = resources.getDrawable(R.drawable.rectangle)
-        button.id = mainLinLayout.childCount + 1
+        textView.layoutParams = buttonParams
+        textView.background = resources.getDrawable(R.drawable.rectangle)
+        textView.id = mainLinLayout.childCount + 1
 
 
         set.clone(constraintLayout)
-        set.connect(button.id, ConstraintSet.TOP, constraintLayout.id, ConstraintSet.TOP)
-        set.connect(button.id, ConstraintSet.BOTTOM, constraintLayout.id, ConstraintSet.BOTTOM)
-        set.connect(button.id, ConstraintSet.START, constraintLayout.id, ConstraintSet.START)
-        set.connect(button.id, ConstraintSet.END, constraintLayout.id, ConstraintSet.END)
+        set.connect(textView.id, ConstraintSet.TOP, constraintLayout.id, ConstraintSet.TOP)
+        set.connect(textView.id, ConstraintSet.BOTTOM, constraintLayout.id, ConstraintSet.BOTTOM)
+        set.connect(textView.id, ConstraintSet.START, constraintLayout.id, ConstraintSet.START)
+        set.connect(textView.id, ConstraintSet.END, constraintLayout.id, ConstraintSet.END)
         set.applyTo(constraintLayout)
 
         val innerLinLayout : LinearLayout = LinearLayout(this)
@@ -195,6 +143,7 @@ class MainActivity : AppCompatActivity() {
         innerScrollViewParams.bottomMargin = 40
         innerScrollViewParams.marginStart = 20
         innerScrollViewParams.marginEnd = 20
+        innerLinLayout.setPadding(20, 0, 20, 0)
         innerScrollView.scrollBarSize = 0
         innerScrollView.isScrollbarFadingEnabled = false
         innerScrollView.layoutParams = innerScrollViewParams
@@ -216,12 +165,71 @@ class MainActivity : AppCompatActivity() {
         innerScrollView.addView(scrollViewLinearLayout)
 
         mainLinLayout.addView(constraintLayout)
-
-//        val inflater = LayoutInflater.from(this)
-//        val layout = inflater.inflate(R.layout.activity_main, null, false)
-//        val constr : ConstraintLayout = findViewById(R.id.main_screen_constr_layout)
-//        constr.addView(layout)
     }
 
+    //Создаёт JSON-файл, который будет хранить напоминания
+    //Файл создаётся при первом заходе в приложение
+    private fun createJSONFile() {
+        var file = File(filesDir, FILE_NAME)
+        var fileExists = file.exists()
 
+        if (!fileExists) {
+            val fos: FileOutputStream = openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+            val osw = OutputStreamWriter(fos)
+            val text = "{\n" +
+                    "    \"reminders\" : [\n" +
+                    "    ]\n" +
+                    "}"
+            osw.write(text);
+            osw.flush();
+            osw.close();
+            fos.close()
+            Toast.makeText(this, "Saved to ${filesDir}/${FILE_NAME}", Toast.LENGTH_LONG).show()
+            FILE_PATH = "${filesDir}/${FILE_NAME}"
+
+            sPref = getPreferences(Context.MODE_PRIVATE)
+            val editor = sPref.edit()
+            editor.putString(JSON_REMINDINGS_FILE_PATH, FILE_PATH)
+            editor.commit()
+        }
+        else {
+            sPref = getPreferences(Context.MODE_PRIVATE)
+            val jsonFilePath : String? = sPref.getString(JSON_REMINDINGS_FILE_PATH, "")
+            FILE_PATH = jsonFilePath.toString()
+        }
+    }
+
+    //Каждый раз при создании Activity приложение считывает JSON-файл с напоминаниями и выводит
+    //ближащие 5 напоминаний на главный экран
+    private fun initNearestRems() {
+        val mapper = ObjectMapper()
+        node = mapper.readValue(
+            File(FILE_PATH), JsonNode::class.java
+        )
+        datesList = node.findValue("reminders").findValues("date")
+        timesList = node.findValue("reminders").findValues("time")
+        textsList = node.findValue("reminders").findValues("text")
+
+        var i = 0
+        val arrRems : ArrayList<Reminder> = ArrayList()
+
+        while (i < textsList.size) {
+            val reminder = Reminder(textsList[i].asText(), datesList[i].asText(), timesList[i].asText())
+            arrRems.add(reminder)
+            i++
+        }
+        val sortedArrRems = sortRems(arrRems)
+        i = 0
+        while (i < sortedArrRems.size) {
+            if (i == 5) break
+            createNearestReminding(sortedArrRems[i].text, sortedArrRems[i].date, sortedArrRems[i].time)
+            i++
+        }
+    }
+
+    private fun sortRems(list : ArrayList<Reminder>) : ArrayList<Reminder> {
+        QuickSort.quickSort(list, 0, list.size - 1)
+        val sortedList : ArrayList<Reminder> = list
+        return sortedList
+    }
 }

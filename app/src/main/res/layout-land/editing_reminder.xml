@@ -22,7 +22,7 @@
 
 
         <EditText
-            android:id="@+id/reminding_text"
+            android:id="@+id/edit_reminding_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
@@ -77,19 +77,19 @@
                 android:shadowRadius="5"/>
 
             <Button
-                android:id="@+id/create_button"
+                android:id="@+id/save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_weight="0"
                 android:background="@drawable/buttonshape"
-                android:onClick="onCreateButtonClick"
+                android:onClick="onSaveButtonClick"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="create"
+                android:text="save"
                 android:textColor="#000000"
                 android:textSize="30sp" />
         </LinearLayout>

@@ -28,6 +28,10 @@
         <activity
             android:name=".Activities.FragmentsActivity">
         </activity>
+        <activity
+            android:name=".Activities.EditingReminderActivity"
+            android:parentActivityName=".Activities.MyRemindersActivity">
+        </activity>
     </application>
 
 </manifest>

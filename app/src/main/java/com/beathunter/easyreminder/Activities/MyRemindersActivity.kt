@@ -1,6 +1,7 @@
 package com.beathunter.easyreminder.Activities
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -32,17 +33,17 @@ class MyRemindersActivity : AppCompatActivity() {
         val linearLayoutManager : LinearLayoutManager = LinearLayoutManager(this)
         remsList.layoutManager = linearLayoutManager
 
-        remindingsFile = File("remindings.json")
+        remindingsFile = File(MainActivity.FILE_PATH)
 
-        remsAdapter = RemindersAdapter(4, remindingsFile)
+        remsAdapter = RemindersAdapter(remindingsFile, this)
         remsList.adapter = remsAdapter
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         val intent: Intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
     }
+
 }

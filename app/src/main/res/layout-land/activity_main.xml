@@ -45,8 +45,9 @@
                 android:id="@+id/ScrollView_maincreen_land"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="100dp"
+                android:layout_marginHorizontal="50dp"
                 android:layout_marginVertical="10dp"
+                android:padding="10dp"
                 android:scrollbars="none">
 
                 <LinearLayout

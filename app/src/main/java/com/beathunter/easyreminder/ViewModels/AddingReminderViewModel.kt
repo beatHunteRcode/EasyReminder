@@ -6,7 +6,7 @@ class AddingReminderViewModel : ViewModel() {
 
     private var dateButtonText : String = "set date"
     private var timeButtonText : String = "set time"
-    private var remindingText : String = "write your reminding here"
+    private var remindingText : String = ""
 
     public fun getDateButtonText() : String { return this.dateButtonText }
     public fun getTimeButtonText() : String { return this.timeButtonText }

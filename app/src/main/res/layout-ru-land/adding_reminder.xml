@@ -30,8 +30,9 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="20dp"
             android:layout_gravity="center"
-            android:inputType="textPersonName"
-            android:text="напишите своё напоминание здесь"
+            android:inputType="textMultiLine"
+            android:hint="напишите своё напоминание здесь"
+            android:background="@drawable/buttonshape"
             android:textAlignment="center" />
 
         <LinearLayout

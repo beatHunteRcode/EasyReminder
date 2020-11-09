@@ -22,7 +22,7 @@
 
 
         <EditText
-            android:id="@+id/reminding_text"
+            android:id="@+id/edit_reminding_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
@@ -31,7 +31,7 @@
             android:layout_marginVertical="20dp"
             android:layout_gravity="center"
             android:inputType="textMultiLine"
-            android:hint="write your reminding here"
+            android:hint="напишите своё напоминание здесь"
             android:background="@drawable/buttonshape"
             android:textAlignment="center" />
 
@@ -53,7 +53,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/buttonshape"
                 android:onClick="onSelectDateButtonClick"
-                android:text="set date"
+                android:text="выбрать дату"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
@@ -70,26 +70,26 @@
                 android:layout_gravity="center"
                 android:background="@drawable/buttonshape"
                 android:onClick="onSelectTimeButtonClick"
-                android:text="set time"
+                android:text="выбрать время"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"/>
 
             <Button
-                android:id="@+id/create_button"
+                android:id="@+id/save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_weight="0"
                 android:background="@drawable/buttonshape"
-                android:onClick="onCreateButtonClick"
+                android:onClick="onSaveButtonClick"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="create"
+                android:text="сохранить"
                 android:textColor="#000000"
                 android:textSize="30sp" />
         </LinearLayout>
