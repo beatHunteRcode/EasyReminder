@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="362213fe-77ce-468b-986b-3dcb4725eee1" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="ProjectId" id="1k4BWBWvp5b6EKKG3ft92j4R3Hx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\Java\AndroidStudioProjects\android-lectures-master\labs\04\biblib\src\test\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android JUnit.BibDatabaseTest">
+    <configuration name="BibDatabaseTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblib" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="name.ank.lab4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="name.ank.lab4" />
+      <option name="MAIN_CLASS_NAME" value="name.ank.lab4.BibDatabaseTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BibDatabaseTest.getFirstEntry" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblib" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="name.ank.lab4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="name.ank.lab4" />
+      <option name="MAIN_CLASS_NAME" value="name.ank.lab4.BibDatabaseTest" />
+      <option name="METHOD_NAME" value="getFirstEntry" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BibDatabaseTest.shuffleFlag" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblib" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="name.ank.lab4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="name.ank.lab4" />
+      <option name="MAIN_CLASS_NAME" value="name.ank.lab4.BibDatabaseTest" />
+      <option name="METHOD_NAME" value="shuffleFlag" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BibDatabaseTest.strictModeThrowsException" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblib" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="name.ank.lab4.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="name.ank.lab4" />
+      <option name="MAIN_CLASS_NAME" value="name.ank.lab4.BibDatabaseTest" />
+      <option name="METHOD_NAME" value="strictModeThrowsException" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Android JUnit.BibDatabaseTest" />
+        <item itemvalue="Android JUnit.BibDatabaseTest.shuffleFlag" />
+        <item itemvalue="Android JUnit.BibDatabaseTest.strictModeThrowsException" />
+        <item itemvalue="Android JUnit.BibDatabaseTest.getFirstEntry" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="362213fe-77ce-468b-986b-3dcb4725eee1" name="Default Changelist" comment="" />
+      <created>1604950012149</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604950012149</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="656" y="276" key="FileChooserDialogImpl" timestamp="1605853237151">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605853237151" />
+    <state width="1877" height="240" key="GridCell.Tab.0.bottom" timestamp="1605966261036">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605966261036" />
+    <state width="1877" height="240" key="GridCell.Tab.0.center" timestamp="1605966261036">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605966261036" />
+    <state width="1877" height="240" key="GridCell.Tab.0.left" timestamp="1605966261036">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605966261036" />
+    <state width="1877" height="240" key="GridCell.Tab.0.right" timestamp="1605966261036">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605966261036" />
+    <state width="1877" height="214" key="GridCell.Tab.1.bottom" timestamp="1605816915963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="214" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605816915963" />
+    <state width="1877" height="214" key="GridCell.Tab.1.center" timestamp="1605816915963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="214" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605816915963" />
+    <state width="1877" height="214" key="GridCell.Tab.1.left" timestamp="1605816915963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="214" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605816915963" />
+    <state width="1877" height="214" key="GridCell.Tab.1.right" timestamp="1605816915963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="214" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605816915963" />
+    <state x="468" y="372" key="com.intellij.ide.util.TipDialog" timestamp="1605853093188">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="468" y="372" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605853093188" />
+  </component>
+</project>

@@ -1,18 +1,16 @@
-package com.beathunter.easyreminder
+package com.beathunter.easyreminder.Adapters
 
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.beathunter.easyreminder.Activities.EditingReminderActivity
-import com.beathunter.easyreminder.Activities.MyRemindersActivity
+import com.beathunter.easyreminder.QuickSort
+import com.beathunter.easyreminder.R
+import com.beathunter.easyreminder.Reminder
 import com.beathunter.easyreminder.ViewModels.EditingReminderViewModel
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -31,7 +29,7 @@ class RemindersAdapter(remsFile: File, context: Context) :
 
     private val sortedArrRems : ArrayList<Reminder>
 
-    private var i = -1
+    private var i = 0
     var parentContext : Context
 
     init {
@@ -48,7 +46,11 @@ class RemindersAdapter(remsFile: File, context: Context) :
         val arrRems : ArrayList<Reminder> = ArrayList()
 
         while (i < textsList.size) {
-            val reminder = Reminder(textsList[i].asText(), datesList[i].asText(), timesList[i].asText())
+            val reminder = Reminder(
+                textsList[i].asText(),
+                datesList[i].asText(),
+                timesList[i].asText()
+            )
             arrRems.add(reminder)
             i++
         }
@@ -67,12 +69,14 @@ class RemindersAdapter(remsFile: File, context: Context) :
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(layoutId, parent, false)
 
-        val viewHolder : RemindersViewHolder = RemindersViewHolder(view, parentContext)
+        val viewHolder : RemindersViewHolder =
+            RemindersViewHolder(
+                view,
+                parentContext
+            )
         viewHolder.dateTV.text = "date"
         viewHolder.timeTV.text = "time"
         viewHolder.textTV.text = "remText"
-
-        if (i < textsList.size - 1) i++
 
         return viewHolder
     }
@@ -80,6 +84,9 @@ class RemindersAdapter(remsFile: File, context: Context) :
     //у созданных ViewHolder'ов меняем значения
     override fun onBindViewHolder(holder: RemindersViewHolder, position: Int) {
         holder.bind(sortedArrRems[i].text, sortedArrRems[i].date, sortedArrRems[i].time)
+
+        if (i < itemCount - 1) i++
+        else i = 0
     }
 
     //подсчитывает общее количество элементов в списке
@@ -113,7 +120,11 @@ class RemindersAdapter(remsFile: File, context: Context) :
     }
 
     private fun sortRems(list : ArrayList<Reminder>) : ArrayList<Reminder> {
-        QuickSort.quickSort(list, 0, list.size - 1)
+        QuickSort.quickSort(
+            list,
+            0,
+            list.size - 1
+        )
         val sortedList : ArrayList<Reminder> = list
         return sortedList
     }

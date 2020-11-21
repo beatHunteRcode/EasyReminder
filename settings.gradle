@@ -1,2 +1,3 @@
+include ':biblib'
 rootProject.name='EasyReminder'
 include ':app'

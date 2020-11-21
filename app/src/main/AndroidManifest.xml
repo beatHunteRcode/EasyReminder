@@ -32,6 +32,10 @@
             android:name=".Activities.EditingReminderActivity"
             android:parentActivityName=".Activities.MyRemindersActivity">
         </activity>
+        <activity
+            android:name=".Activities.BibTexRVActivity"
+            android:parentActivityName=".Activities.MyRemindersActivity">
+        </activity>
     </application>
 
 </manifest>

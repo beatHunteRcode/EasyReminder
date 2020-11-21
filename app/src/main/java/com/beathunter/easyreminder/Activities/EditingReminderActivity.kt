@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import name.ank.lab4.BibDatabase
 import java.io.File
 import java.util.*
 
@@ -105,7 +106,7 @@ class EditingReminderActivity : AppCompatActivity() {
      * 1. Парсится JSON-файл и составялется массив из всех напоминаний
      * 2. Из массива удаляется напоминание со старой информацией (до редактирования)
      * 3. В массив добавляется напоминенаие с новой (отредактированной) информацией
-     * 4. Весь массив заносится
+     * 4. Весь массив заносится в JSON-файл, который затем будет считываться и отображаться в MyRemindersActivity.kt
      * */
     fun onSaveButtonClick(v : View) {
         EditingReminderViewModel.setRemindingText(findViewById<TextView>(com.beathunter.easyreminder.R.id.edit_reminding_text).text.toString())
@@ -142,5 +143,4 @@ class EditingReminderActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 }

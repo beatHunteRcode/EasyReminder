@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 class EditingReminderViewModel : ViewModel() {
 
     companion object {
-        private var dateButtonText: String = "jopa"
+        private var dateButtonText: String = "set date"
         private var timeButtonText: String = "set time"
         private var remindingText: String = ""
 

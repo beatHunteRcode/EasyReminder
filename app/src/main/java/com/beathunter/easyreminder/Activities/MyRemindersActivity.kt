@@ -1,16 +1,14 @@
 package com.beathunter.easyreminder.Activities
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beathunter.easyreminder.R
-import com.beathunter.easyreminder.RemindersAdapter
-import com.beathunter.easyreminder.ViewModels.AddingReminderViewModel
+import com.beathunter.easyreminder.Adapters.RemindersAdapter
+import kotlinx.android.synthetic.main.my_reminders.*
 import java.io.File
 
 class MyRemindersActivity : AppCompatActivity() {
@@ -25,7 +23,6 @@ class MyRemindersActivity : AppCompatActivity() {
         setContentView(R.layout.my_reminders)
 //        getSupportActionBar()?.hide()
         supportActionBar?.title = "My Reminders"
-
         remsList = findViewById(R.id.rv_rems)
 
         //LayoutManager задаёт то, как элементы распределяются в RecyclerView
@@ -35,8 +32,17 @@ class MyRemindersActivity : AppCompatActivity() {
 
         remindingsFile = File(MainActivity.FILE_PATH)
 
-        remsAdapter = RemindersAdapter(remindingsFile, this)
+        remsAdapter = RemindersAdapter(
+            remindingsFile,
+            this
+        )
         remsList.adapter = remsAdapter
+
+        floatingActionButton.setOnClickListener {
+            val intent: Intent = Intent(this, BibTexRVActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onBackPressed() {
@@ -45,5 +51,4 @@ class MyRemindersActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 }
