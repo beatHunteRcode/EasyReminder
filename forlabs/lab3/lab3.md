@@ -124,6 +124,12 @@ view.tryto2btn.setOnClickListener {
 java.lang.IllegalArgumentException: navigation destination com.beathunter.easyreminder:id/action_blankFragment_to_blankFragment2 is unknown to this NavController
 ```
 
+### Выводы
+В данной работе мы
+- ознакомились с методом обработки жизненного цикла activity/fragment при помощи Lifecycle-Aware компонентов
+- ознакомились с переходами между `Activity` с помощью `Intent`, `startActivity()` и `startActivityForResult()`
+- изучили основные возможности навигации внутри приложения: созданиие новых activity, navigation graph, переходы между фрагментами
+
 
 ### Ссылки на файлы, используемые в данной лабораторной
 - Activity
