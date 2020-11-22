@@ -10,27 +10,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private val TAG : String = "lifecycle"
     var secondsElapsed: Int = 0
-    var isRunning = false
+    var isRunning = true
 
     var backgroundThread = Thread {
-        while (true) {
-            Thread.sleep(1000)
-            if (isRunning) {
+            while (!Thread.currentThread().isInterrupted) {
+                Thread.sleep(1000)
                 textSecondsElapsed.post {
                     textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                    threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
                 }
+                if (!isRunning) Thread.currentThread().interrupt()
             }
-        }
     }
-    //как избавится от лишнего треда
-    //что происходит, если мы все таки обратимся к secondsElapsed, минуя if
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         backgroundThread.start()
+        isRunning = true
         Log.d(TAG, "Activity onCreate(): created")
         val view : View = View(this)
-        view.post()
     }
 
     override fun onStart() {
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "Activity onDestroy(): destroyed")
+        isRunning = false
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
