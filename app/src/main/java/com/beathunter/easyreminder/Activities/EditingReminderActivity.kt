@@ -143,4 +143,35 @@ class EditingReminderActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    fun onRemoveButtonClick(v : View) {
+        EditingReminderViewModel.setRemindingText(findViewById<TextView>(com.beathunter.easyreminder.R.id.edit_reminding_text).text.toString())
+        //добавляем напоминание в JSON-файл
+        val mapper = ObjectMapper()
+        val file = File(MainActivity.FILE_PATH)
+        val node = mapper.readValue(
+            file, JsonNode::class.java
+        )
+
+        val datesList = node.findValue("reminders").findValues("date")
+        val timesList = node.findValue("reminders").findValues("time")
+        val textsList = node.findValue("reminders").findValues("text")
+
+        //поиск индекса напоминания в JSON-файле для дальнейшего удаления
+        var i = 0
+        while (i < textsList.size) {
+            if (textsList[i].asText() == oldText &&
+                datesList[i].asText() == oldDate &&
+                timesList[i].asText() == oldTime) break
+            else i++
+        }
+
+        val remsArrayNode: ArrayNode = node.findValue("reminders") as ArrayNode
+        remsArrayNode.remove(i)
+        mapper.writeValue(file, node)
+
+        val intent: Intent = Intent(this, MyRemindersActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }
