@@ -31,7 +31,7 @@
             android:layout_weight="10"
             android:background="@drawable/buttonshape"
             android:ems="10"
-            android:hint="write your reminding here"
+            android:hint="write your reminder here"
             android:inputType="textMultiLine"
             android:padding="20dp"
             android:textAlignment="center" />
