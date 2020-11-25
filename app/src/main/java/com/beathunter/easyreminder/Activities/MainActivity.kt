@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.beathunter.easyreminder.QuickSort
 import com.beathunter.easyreminder.R
 import com.beathunter.easyreminder.Reminder
+import com.beathunter.easyreminder.ViewModels.EditingReminderViewModel
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.File
@@ -164,6 +165,43 @@ class MainActivity : AppCompatActivity() {
         innerScrollView.addView(scrollViewLinearLayout)
 
         mainLinLayout.addView(constraintLayout)
+
+        textView.setOnClickListener {
+            EditingReminderViewModel.setRemindingText(remText)
+            EditingReminderViewModel.setDateButtonText(dateText)
+            EditingReminderViewModel.setTimeButtonText(timeText)
+
+            val intent: Intent = Intent(this, EditingReminderActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        remTextView.setOnClickListener {
+            EditingReminderViewModel.setRemindingText(remText)
+            EditingReminderViewModel.setDateButtonText(dateText)
+            EditingReminderViewModel.setTimeButtonText(timeText)
+
+            val intent: Intent = Intent(this, EditingReminderActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        dateTextView.setOnClickListener {
+            EditingReminderViewModel.setRemindingText(remText)
+            EditingReminderViewModel.setDateButtonText(dateText)
+            EditingReminderViewModel.setTimeButtonText(timeText)
+
+            val intent: Intent = Intent(this, EditingReminderActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        scrollViewLinearLayout.setOnClickListener {
+            EditingReminderViewModel.setRemindingText(remText)
+            EditingReminderViewModel.setDateButtonText(dateText)
+            EditingReminderViewModel.setTimeButtonText(timeText)
+
+            val intent: Intent = Intent(this, EditingReminderActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     //Создаёт JSON-файл, который будет хранить напоминания

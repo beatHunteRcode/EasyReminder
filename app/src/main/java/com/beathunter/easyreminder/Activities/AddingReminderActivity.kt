@@ -60,7 +60,7 @@ class AddingReminderActivity : AppCompatActivity() {
         selectDateButton.setOnClickListener {
             val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
                 val date = "${mDay}.${mMonth + 1}.${mYear}"
-                selectDateButton.setText(date);
+                selectDateButton.setText(date.trim());
                 addingReminderViewModel.setDateButtonText(date)
             }, year, month, day)
             datePickerDialog.show()
@@ -88,7 +88,7 @@ class AddingReminderActivity : AppCompatActivity() {
                     time = "$strHour:$strMinute PM"
                 }
                 selectTimeButton.setText(time)
-                addingReminderViewModel.setTimeButtonText(time)
+                addingReminderViewModel.setTimeButtonText(time.trim())
             }, 12, 0, false
         )
         timePickerDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -112,9 +112,9 @@ class AddingReminderActivity : AppCompatActivity() {
             val remsArrayNode: ArrayNode = node.findValue("reminders") as ArrayNode
             val addedNode: ObjectNode = remsArrayNode.addObject()
             addedNode
-                .put("text", addingReminderViewModel.getRemindingText())
-                .put("date", addingReminderViewModel.getDateButtonText())
-                .put("time", addingReminderViewModel.getTimeButtonText())
+                .put("text", addingReminderViewModel.getRemindingText().trim())
+                .put("date", addingReminderViewModel.getDateButtonText().trim())
+                .put("time", addingReminderViewModel.getTimeButtonText().trim())
             mapper.writeValue(file, node)
 
             val intent: Intent = Intent(this, MainActivity::class.java)

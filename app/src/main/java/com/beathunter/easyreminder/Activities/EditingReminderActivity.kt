@@ -134,9 +134,9 @@ class EditingReminderActivity : AppCompatActivity() {
         remsArrayNode.remove(i)
         val addedNode: ObjectNode = remsArrayNode.addObject()
         addedNode
-            .put("text", EditingReminderViewModel.getRemindingText())
-            .put("date", EditingReminderViewModel.getDateButtonText())
-            .put("time", EditingReminderViewModel.getTimeButtonText())
+            .put("text", EditingReminderViewModel.getRemindingText().trim())
+            .put("date", EditingReminderViewModel.getDateButtonText().trim())
+            .put("time", EditingReminderViewModel.getTimeButtonText().trim())
         mapper.writeValue(file, node)
 
         val intent: Intent = Intent(this, MyRemindersActivity::class.java)
