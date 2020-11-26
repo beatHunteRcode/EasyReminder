@@ -10,3 +10,4 @@ These are reports for labs from my study course. If you are not my teacher, you 
 2. [Lab2](./forlabs/lab2/lab2.md)
 3. [Lab3](./forlabs/lab3/lab3.md)
 4. [Lab4](./forlabs/lab4/lab4.md)
+5. [Lab5](./forlabs/lab5/lab5.md)
