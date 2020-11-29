@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.beathunter.easyreminder">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,14 @@
         <activity
             android:name=".Activities.BibTexRVActivity"
             android:parentActivityName=".Activities.MyRemindersActivity">
+        </activity>
+        <activity
+            android:name=".Activities.LoadImageActivity"
+            android:parentActivityName=".Activities.MainActivity">
+        </activity>
+        <activity
+            android:name=".Activities.PicassoActivity"
+            android:parentActivityName=".Activities.LoadImageActivity">
         </activity>
     </application>
 

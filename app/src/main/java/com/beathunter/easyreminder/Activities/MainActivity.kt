@@ -14,6 +14,7 @@ import com.beathunter.easyreminder.Reminder
 import com.beathunter.easyreminder.ViewModels.EditingReminderViewModel
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
@@ -59,6 +60,13 @@ class MainActivity : AppCompatActivity() {
         val nearest = findViewById<TextView>(R.id.nearest_textview)
         nearest.setOnClickListener {
             val intent: Intent = Intent(this, FragmentsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val toLoadButton = findViewById<FloatingActionButton>(R.id.toLoadScreenFloatButton)
+        toLoadButton.setOnClickListener {
+            val intent: Intent = Intent(this, LoadImageActivity::class.java)
             startActivity(intent)
             finish()
         }
