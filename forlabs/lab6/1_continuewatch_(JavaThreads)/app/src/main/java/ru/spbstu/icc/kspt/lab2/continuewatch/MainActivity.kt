@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private val TAG : String = "lifecycle"
     var secondsElapsed: Int = 0
-    var isRunning = true
 
     var backgroundThread : Thread? = null
 
@@ -31,23 +30,26 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Activity onResume(): resumed")
 
         backgroundThread = Thread {
-            while (!Thread.currentThread().isInterrupted) {
-                Thread.sleep(1000)
-                textSecondsElapsed.post {
-                    textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
-                    threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
+            try {
+                while (backgroundThread?.isInterrupted == false) {
+                    Thread.sleep(1000)
+                    textSecondsElapsed.post {
+                        textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                        threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
+                    }
                 }
-                if (!isRunning) Thread.currentThread().interrupt()
+            }
+            catch (e: InterruptedException) {
+                //ignored
             }
         }
         backgroundThread?.start()
-        isRunning = true
     }
 
     override fun onPause() {
         super.onPause()
         Log.d(TAG, "Activity onPause(): paused")
-        isRunning = false
+        backgroundThread?.interrupt()
     }
 
     override fun onStop() {

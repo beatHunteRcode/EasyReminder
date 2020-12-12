@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="biblib/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/biblib.iml" filepath="$PROJECT_DIR$/.idea/modules/biblib.iml" group="biblib" />
     </modules>
   </component>

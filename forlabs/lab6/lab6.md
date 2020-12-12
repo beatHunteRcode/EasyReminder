@@ -20,35 +20,39 @@
 Вернёмся ко 2ой лабораторной... Одной из её проблем были "лишние" треды. Как только активити пересоздавалась (например, при повороте экрана) - создавался новый `Thread`, который продолжал подсчёт секунд, а старый продолжал висеть в фоне и тратить ресурсы.
 В данном пункте нам нужно избавиться от этой проблемы.
 Решение:
-1. В инициализацию треда добавляем условие, по которому он будет работать: `!Thread.currentThread().isInterrupted`
-2. Также добавляем вспомогательный флаг `isRunning`, который будет нужен для того чтобы удалить тред, при разрушении активити. Также этот флаг спасает от `InterruptedExcepton`
-3. Перемещаем саму иницализацию треда в `onResume()`
-4. Т.к. нам нужно, чтобы таймер останавливался при сворачивании приложения, а не только при разрушении активити, то переключаем вспомогательный флаг `isRunning` в `onPause()`, который как раз удалит уже "лишний" тред перед
+1. В инициализацию треда добавляем условие, по которому он будет работать: `backgroundThread?.isInterrupted == false`
+2. Перемещаем саму иницализацию треда в `onResume()`
+3. Т.к. нам нужно, чтобы таймер останавливался при сворачивании приложения, а не только при разрушении активити, с помощью `backgroundThread?.interrupt()` удаляем лишний тред при сворачивании приложения. В самом деле треда выскочит исключение `InterruptedExeption`, которое мсы успешно ловим.
+4. При разворачивании приложения (и при создании активити заново) создаём новый тред, который продолжает подсчёт времени.
 <br>
 
 Ключевая часть из [MainActivity.kt](https://github.com/beatHunteRbbx/EasyReminder/blob/master/forlabs/lab6/1_continuewatch_(JavaThreads)/app/src/main/java/ru/spbstu/icc/kspt/lab2/continuewatch/MainActivity.kt)
 ```kotlin
 override fun onResume() {
-    super.onResume()
-    Log.d(TAG, "Activity onResume(): resumed")
-    backgroundThread = Thread {
-        while (!Thread.currentThread().isInterrupted) {
-            Thread.sleep(1000)
-            textSecondsElapsed.post {
-                textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
-                threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
+        super.onResume()
+        Log.d(TAG, "Activity onResume(): resumed")
+
+        backgroundThread = Thread {
+            try {
+                while (backgroundThread?.isInterrupted == false) {
+                    Thread.sleep(1000)
+                    textSecondsElapsed.post {
+                        textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                        threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
+                    }
+                }
             }
-            if (!isRunning) Thread.currentThread().interrupt()
+            catch (e: InterruptedException) {
+                //ignored
+            }
         }
-    }
-    backgroundThread?.start()
-    isRunning = true
+        backgroundThread?.start()
 }
 
 override fun onPause() {
-    super.onPause()
-    Log.d(TAG, "Activity onPause(): paused")
-    isRunning = false
+        super.onPause()
+        Log.d(TAG, "Activity onPause(): paused")
+        backgroundThread?.interrupt()
 }
 ```
 <br>
@@ -306,7 +310,7 @@ class PicassoActivity : AppCompatActivity() {
 
 ### Вывод
 В данной работе мы познакомились с различными способами реализации многопоточности в Android.
-- `Java Threads` - не самый лучший способ для андроида так как, если использовать `Thread.sleep()`, то приложение будет зависать
+- `Java Threads` - не самый лучший способ для андроида так как нужно самому следить на всеми созданными тредами и вовремя их удалять
 - `AsyncTask` - устаревшее решение
 - `Kotlin Coroutines` - на мой взгляд, самое лучшее из рассмотренных. Лучше, чем AsyncTask, так как позволяет писать меньше кода с тем же функционалом, да и еще делает его более понятным и лучше читаемым.
 
