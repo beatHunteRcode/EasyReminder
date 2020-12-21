@@ -20,39 +20,38 @@
 Вернёмся ко 2ой лабораторной... Одной из её проблем были "лишние" треды. Как только активити пересоздавалась (например, при повороте экрана) - создавался новый `Thread`, который продолжал подсчёт секунд, а старый продолжал висеть в фоне и тратить ресурсы.
 В данном пункте нам нужно избавиться от этой проблемы.
 Решение:
-1. В инициализацию треда добавляем условие, по которому он будет работать: `backgroundThread?.isInterrupted == false`
-2. Перемещаем саму иницализацию треда в `onResume()`
-3. Т.к. нам нужно, чтобы таймер останавливался при сворачивании приложения, а не только при разрушении активити, с помощью `backgroundThread?.interrupt()` удаляем лишний тред при сворачивании приложения. В самом деле треда выскочит исключение `InterruptedExeption`, которое мсы успешно ловим.
-4. При разворачивании приложения (и при создании активити заново) создаём новый тред, который продолжает подсчёт времени.
+1. Инициализируем `ExecutorServise` с пулом в 1 тред
+2. В `onResume()` помещаем в очередь на выполнение наш `Runnable`-task в проинициализированный `ExecutorServise`
+3. Т.к. нам нужно, чтобы таймер останавливался при сворачивании приложения, а не только при разрушении активити, с помощью `.isShutdown` и флага `isRunning` следим за выполнением task'a
+4. При сворачивании и разворачивании приложения старый таск удаляется и тред из пула начинает выполнение следующего task'a из очереди. Также при разрушении активити создаётся новый пул из 1 треда и начинается выполнение task'a
 <br>
 
 Ключевая часть из [MainActivity.kt](https://github.com/beatHunteRbbx/EasyReminder/blob/master/forlabs/lab6/1_continuewatch_(JavaThreads)/app/src/main/java/ru/spbstu/icc/kspt/lab2/continuewatch/MainActivity.kt)
 ```kotlin
+var executorService : ExecutorService = Executors.newSingleThreadExecutor()
+var isRunning = false
+
 override fun onResume() {
         super.onResume()
         Log.d(TAG, "Activity onResume(): resumed")
-
-        backgroundThread = Thread {
-            try {
-                while (backgroundThread?.isInterrupted == false) {
-                    Thread.sleep(1000)
-                    textSecondsElapsed.post {
-                        textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
-                        threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
+        isRunning = true
+        executorService.execute {
+                if (!executorService.isShutdown) {
+                    while (isRunning) {
+                        Thread.sleep(1000)
+                        textSecondsElapsed.post {
+                            textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                            threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
+                        }
                     }
                 }
-            }
-            catch (e: InterruptedException) {
-                //ignored
-            }
         }
-        backgroundThread?.start()
 }
 
 override fun onPause() {
         super.onPause()
         Log.d(TAG, "Activity onPause(): paused")
-        backgroundThread?.interrupt()
+        isRunning = false
 }
 ```
 <br>
@@ -66,19 +65,21 @@ override fun onPause() {
 <br>
 
 Также в теле класса, который наследует AsyncTask можно переопределить следующие методы
-- `doInBackground()` - в нём описывается то, что будет делать процесс
-- `onProgressUpdate()` - то, что мы хотим делать во время работы AsyncTask'a
-- `onPreExecute()` - то, что мы хотим сделать перед началом работы процесса
-- `onPostExecute()` - то, что мы хотим сделать после завершения работы процесса
+- `doInBackground()` - в нём описывается то, что будет делать процесс. Выполняется в новом потоке. Не имеет доступа к UI.
+- `onProgressUpdate()` - вызывается при вызове `publishProgress()` в `doInBackground()`. Имеет доступ к UI. С помощью него можно обновлять пользовательский интерфейс.
+- `onPreExecute()` - то, что мы хотим сделать перед началом работы процесса. Имеет доступ к UI.
+- `onPostExecute()` - то, что мы хотим сделать после завершения работы процесса. Имеет доступ к UI.
 <br>
 
 ##### Решение
 1. Создаём вложенный класс `MyTask`, наследуем `AsyncTask`, в конструктор вложенного класса передаём в качестве параметра - функцию - функцию обновления текста у `TextView`
 2. Переопределяем `doInBackground()` и `onProgressUpdate()`
-3. Также как и с Java Thread: в `onResume()` инициализируем `MyTask` и запускаем процесс через `myTask?.execute()`, а в `onPause()` останавливаем процесс через `myTask?.cancel(false)`
+3. Также как и с Java Thread: в `onResume()` инициализируем `MyTask` и запускаем процесс через `myTask?.execute()` (`.execute()` запускает `AsynсTask` в основном потоке), а в `onPause()` останавливаем процесс через `myTask?.cancel(false)`
 <br>
 
-В этот раз нам не нужно создавать дополнительный флаг, чтобы избежать `InterruptedException()`, так как у нас есть заготовленный флаг `AsyncTask'a` - `isCancelled`, что весьма удобно.
+У `.cancel()` есть один один boolean-параметр `mayInterruptIfRunning`, который указывает, может ли система прервать выполнение потока.<br>
+
+Кроме того, в методе `doInBackground()` можно проверять метод `isCancelled()`. Как только мы выполним метод `cancel()`, метод `isCancelled()` будет возвращать `true` и мы должны завершить метод `doInBackground()`. Таким образом, метод `cancel()` служит своеобразной меткой, что задачу нужно отменить. А метод `isCancelled()` будет считывать результат предыдущего метода и позволет выполнить код для завершения задачи.
 
 Ключевая часть из [MainActivity.kt](https://github.com/beatHunteRbbx/EasyReminder/blob/master/forlabs/lab6/2_continuewatch_(AsyncTask)/app/src/main/java/ru/spbstu/icc/kspt/lab2/continuewatch/MainActivity.kt)
 
