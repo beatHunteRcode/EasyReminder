@@ -13,19 +13,21 @@ import name.ank.lab4.BibEntry
 import name.ank.lab4.Keys
 import name.ank.lab4.Types
 
-class BibTexAdapter(db : BibDatabase, context : Context) : RecyclerView.Adapter<BibTexAdapter.BibTexViewHolder>() {
+
+class BibTexAdapter(db: BibDatabase, context: Context) : RecyclerView.Adapter<BibTexAdapter.BibTexViewHolder>() {
 
     private var numbElements = 0
 
     private val itemsList : ArrayList<BibEntry> = ArrayList()
-    var parentContext : Context
+    private var parentContext : Context
 
-    var pagesList  = ArrayList<String>()
-    var yearsList  = ArrayList<String>()
-    var titlesList  = ArrayList<String>()
-    var typesList = ArrayList<Types>()
+    private var pagesList  = ArrayList<String>()
+    private var yearsList  = ArrayList<String>()
+    private var titlesList  = ArrayList<String>()
+    private var typesList = ArrayList<Types>()
 
     private var i = 0
+
 
     init {
         for (i in 0..104) {
@@ -33,11 +35,14 @@ class BibTexAdapter(db : BibDatabase, context : Context) : RecyclerView.Adapter<
         }
 
         for (item in itemsList) {
-            pagesList.add(item.getField(Keys.PAGES))
-            yearsList.add(item.getField(Keys.YEAR))
-            titlesList.add(item.getField(Keys.TITLE))
-            typesList.add(item.type)
+            pagesList.add(if (item.getField(Keys.PAGES) != null) item.getField(Keys.PAGES) else "")
+            yearsList.add(if (item.getField(Keys.YEAR) != null) item.getField(Keys.YEAR) else "")
+            titlesList.add(if (item.getField(Keys.TITLE) != null) item.getField(Keys.TITLE) else "")
+            typesList.add(if (item.type != null) item.type else Types.UNPUBLISHED)
         }
+
+
+
         numbElements = titlesList.size
 
         parentContext = context
@@ -63,46 +68,44 @@ class BibTexAdapter(db : BibDatabase, context : Context) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: BibTexViewHolder, position: Int) {
 
-        if (titlesList[i] == null) titlesList[i] = ""
-        if (pagesList[i] == null) pagesList[i] = ""
-        if (yearsList[i] == null) yearsList[i] = ""
-        if (typesList[i] == null) typesList[i] = Types.UNPUBLISHED
-
         holder.bind(titlesList[i], pagesList[i], yearsList[i], typesList[i])
 
         if (i < numbElements - 1) i++
         else i = 0
     }
 
-    class BibTexViewHolder(itemView : View, parentContext: Context) : RecyclerView.ViewHolder(itemView) {
-        var pagesTV : TextView = itemView.findViewById(R.id.tv_date)
-        var yearTV : TextView = itemView.findViewById(R.id.tv_time)
-        var titleTV : TextView = itemView.findViewById(R.id.tv_text)
+    class BibTexViewHolder(itemView: View, parentContext: Context) : RecyclerView.ViewHolder(itemView) {
+        private var pagesTV : TextView = itemView.findViewById(R.id.tv_date)
+        private var yearTV : TextView = itemView.findViewById(R.id.tv_time)
+        private var titleTV : TextView = itemView.findViewById(R.id.tv_text)
 
         var context = parentContext
 
         var bg : FrameLayout = itemView.findViewById(R.id.rem_frame)
 
-        fun bind(titleText : String, pagesText : String, yearText : String, type: Types) {
+        private val mapColorsForTypes : Map<Types, Int> = mapOf(
+            Types.ARTICLE to R.color.waters,
+            Types.BOOK to R.color.avocado,
+            Types.BOOKLET to R.color.cyberpunkBackground1,
+            Types.CONFERENCE to R.color.bee,
+            Types.INBOOK to R.color.bloody_red,
+            Types.INCOLLECTION to R.color.pinkie,
+            Types.INPROCEEDINGS to R.color.orange,
+            Types.MANUAL to R.color.purple,
+            Types.MASTERSTHESIS to R.color.swamp,
+            Types.MISC to R.color.yellow,
+            Types.PHDTHESIS to R.color.toxic,
+            Types.PROCEEDINGS to R.color.colorAccent,
+            Types.TECHREPORT to R.color.colorPrimaryDark,
+            Types.UNPUBLISHED to R.color.colorPrimary
+        )
+
+        fun bind(titleText: String, pagesText: String, yearText: String, type: Types) {
             titleTV.text = titleText
             pagesTV.text = pagesText
             yearTV.text = yearText
 
-            if (type == Types.ARTICLE) bg.background = context.getDrawable(R.color.waters)
-            if (type == Types.BOOK) bg.background = context.getDrawable(R.color.avocado)
-            if (type == Types.BOOKLET) bg.background = context.getDrawable(R.color.cyberpunkBackground1)
-            if (type == Types.CONFERENCE) bg.background = context.getDrawable(R.color.bee)
-            if (type == Types.INBOOK) bg.background = context.getDrawable(R.color.bloody_red)
-            if (type == Types.INCOLLECTION) bg.background = context.getDrawable(R.color.pinkie)
-            if (type == Types.INPROCEEDINGS) bg.background = context.getDrawable(R.color.orange)
-            if (type == Types.MANUAL) bg.background = context.getDrawable(R.color.purple)
-            if (type == Types.MASTERSTHESIS) bg.background = context.getDrawable(R.color.swamp)
-            if (type == Types.MISC) bg.background = context.getDrawable(R.color.yellow)
-            if (type == Types.PHDTHESIS) bg.background = context.getDrawable(R.color.toxic)
-            if (type == Types.PROCEEDINGS) bg.background = context.getDrawable(R.color.colorAccent)
-            if (type == Types.TECHREPORT) bg.background = context.getDrawable(R.color.colorPrimaryDark)
-            if (type == Types.UNPUBLISHED) bg.background = context.getDrawable(R.color.colorPrimary)
-
+            bg.background = context.getDrawable(mapColorsForTypes[type]!!)
         }
     }
 }

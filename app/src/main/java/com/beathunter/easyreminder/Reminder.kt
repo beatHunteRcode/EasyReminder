@@ -3,11 +3,22 @@ package com.beathunter.easyreminder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Reminder(text : String, date: String, time : String) {
+class Reminder( text : String,
+                date : String,
+                time : String) {
 
     public var text : String = text
     public var date : String = date
     public var time : String = time
+
+    public var day = date.split(".")[0].toInt()
+    public var month = date.split(".")[1].toInt()
+    public var year = date.split(".")[2].toInt()
+
+    public var hours = time.split(":")[0].toInt()
+    public var minutes = time.split(":")[1].split(" ")[0].toInt()
+
+    public var moon = time.split(":")[1].split(" ")[1]
 
     /**
      * millis - переменная отвечающая за значение Date.time
@@ -18,6 +29,8 @@ class Reminder(text : String, date: String, time : String) {
 
 
     init {
+        if (moon.equals("PM")) hours += 12
+
         val datePattern = "dd.MM.yyyy K:mm a"
         val dateFormat = SimpleDateFormat(datePattern, Locale.ENGLISH)
         val dateToParse = this.date + " " + this.time

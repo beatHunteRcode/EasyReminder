@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.beathunter.easyreminder.QuickSort
 import com.beathunter.easyreminder.R
 import com.beathunter.easyreminder.Reminder
+import com.beathunter.easyreminder.Services.ReminderService
 import com.beathunter.easyreminder.ViewModels.EditingReminderViewModel
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var FILE_PATH : String
+        public var arrReminders : ArrayList<Reminder> = ArrayList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -264,6 +266,8 @@ class MainActivity : AppCompatActivity() {
             i++
         }
         val sortedArrRems = sortRems(arrRems)
+        arrReminders.clear()
+        arrReminders.addAll(sortedArrRems)
         i = 0
         while (i < sortedArrRems.size) {
             if (i == 5) break

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.beathunter.easyreminder">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,32 +22,27 @@
         </activity>
         <activity
             android:name=".Activities.AddingReminderActivity"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
+            android:parentActivityName=".Activities.MainActivity"></activity>
         <activity
             android:name=".Activities.MyRemindersActivity"
-            android:parentActivityName=".Activities.MainActivity"
-            android:launchMode="singleTop">
-        </activity>
-        <activity
-            android:name=".Activities.FragmentsActivity">
-        </activity>
+            android:launchMode="singleTop"
+            android:parentActivityName=".Activities.MainActivity"></activity>
+        <activity android:name=".Activities.FragmentsActivity"></activity>
         <activity
             android:name=".Activities.EditingReminderActivity"
-            android:parentActivityName=".Activities.MyRemindersActivity">
-        </activity>
+            android:parentActivityName=".Activities.MyRemindersActivity"></activity>
         <activity
             android:name=".Activities.BibTexRVActivity"
-            android:parentActivityName=".Activities.MyRemindersActivity">
-        </activity>
+            android:parentActivityName=".Activities.MyRemindersActivity"></activity>
         <activity
             android:name=".Activities.LoadImageActivity"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
+            android:parentActivityName=".Activities.MainActivity"></activity>
         <activity
             android:name=".Activities.PicassoActivity"
-            android:parentActivityName=".Activities.LoadImageActivity">
-        </activity>
+            android:parentActivityName=".Activities.LoadImageActivity"></activity>
+        <activity
+            android:name=".Activities.ImageLoadServiceActivity"
+            android:parentActivityName=".Activities.MainActivity"></activity>
     </application>
 
 </manifest>

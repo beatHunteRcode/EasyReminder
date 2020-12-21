@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg p0: Unit?) {
             while (!isCancelled) {
-                Thread.sleep(1000)
+                Thread.sleep(5000)
                 publishProgress()
             }
         }

@@ -22,22 +22,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d(TAG, "Activity onCreate(): created")
         
-        lifecycleScope.launch(Dispatchers.Main) {
-            whenResumed {
+        lifecycleScope.launchWhenResumed {
                 while (true) {
                     delay(1000)
-                    textSecondsElapsed.post {
-                        textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
-                        threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
-                    }
+                    textSecondsElapsed.setText("Seconds elapsed: " + secondsElapsed++)
+                    threadsTV.setText("Number of threads: " + Thread.getAllStackTraces().keys.size)
                 }
-            }
         }
     }
 
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "Activity onStart(): started")
+
     }
 
     override fun onResume() {

@@ -11,9 +11,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.beathunter.easyreminder.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.URL
 
 class LoadImageActivity : AppCompatActivity() {
@@ -35,7 +33,7 @@ class LoadImageActivity : AppCompatActivity() {
         loadButtonCoroutines.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val image = loadImageForCoroutines(urlForCoroutines)
-                launch(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
                     val bmImage = findViewById<ImageView>(R.id.image_to_load)
                     bmImage.setImageBitmap(image)
                 }
