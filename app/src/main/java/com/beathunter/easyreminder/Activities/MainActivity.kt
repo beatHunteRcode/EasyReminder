@@ -73,8 +73,18 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        val toServiceBtn = findViewById<FloatingActionButton>(R.id.toServiceBtn)
+        toServiceBtn.setOnClickListener {
+            val intent: Intent = Intent(this, ImageLoadServiceActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         createJSONFile()
         initNearestRems()
+
+        //запускаем Service для Notifications
+        startService(Intent(this, ReminderService::class.java))
     }
 
     private fun createNearestReminding(remText : String, dateText : String, timeText : String) {

@@ -103,4 +103,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_help" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/toServiceBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toLoadScreenFloatButton"
+        app:srcCompat="@android:drawable/stat_sys_download" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
