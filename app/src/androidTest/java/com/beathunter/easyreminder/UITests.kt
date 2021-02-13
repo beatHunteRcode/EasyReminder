@@ -12,11 +12,10 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
-import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.UiDevice
 import com.beathunter.easyreminder.Activities.AddingReminderActivity
 import com.beathunter.easyreminder.Activities.EditingReminderActivity
-import com.beathunter.easyreminder.Activities.MainActivity
+import com.beathunter.easyreminder.Activities.MainScreenActivity
 import com.beathunter.easyreminder.Activities.MyRemindersActivity
 import org.junit.After
 import org.junit.Before
@@ -39,7 +38,7 @@ class UITests {
     }
 
     @get:Rule
-    var activityRule = ActivityScenarioRule(MainActivity::class.java)
+    var activityRule = ActivityScenarioRule(MainScreenActivity::class.java)
 
     /**
      * Проверяем функции добавления, изменения и удаления напоминания
@@ -72,7 +71,7 @@ class UITests {
 
     private fun workWithReminder() {
         createRem(false)
-        Intents.intended(hasComponent(MainActivity::class.java.name))
+        Intents.intended(hasComponent(MainScreenActivity::class.java.name))
         //переходим в раздел "my reminders"
         //проверяем что созданное напоминание добавилось в список всех напоминаний
         onView(withId(R.id.my_rems_button))
@@ -83,7 +82,7 @@ class UITests {
         removeRem()
         Intents.intended(hasComponent(MyRemindersActivity::class.java.name), times(3))
         pressBack()
-        Intents.intended(hasComponent(MainActivity::class.java.name), times(2))
+        Intents.intended(hasComponent(MainScreenActivity::class.java.name), times(2))
     }
 
     private fun createRem(rotate : Boolean) {

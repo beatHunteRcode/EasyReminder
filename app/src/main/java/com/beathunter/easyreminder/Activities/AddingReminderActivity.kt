@@ -105,7 +105,7 @@ class AddingReminderActivity : AppCompatActivity() {
             addingReminderViewModel.setRemindingText(findViewById<TextView>(R.id.reminding_text).text.toString())
             //добавляем напоминание в JSON-файл
             val mapper = ObjectMapper()
-            val file = File(MainActivity.FILE_PATH)
+            val file = File(MainScreenActivity.FILE_PATH)
             val node = mapper.readValue(
                 file, JsonNode::class.java
             )
@@ -117,7 +117,7 @@ class AddingReminderActivity : AppCompatActivity() {
                 .put("time", addingReminderViewModel.getTimeButtonText().trim())
             mapper.writeValue(file, node)
 
-            val intent: Intent = Intent(this, MainActivity::class.java)
+            val intent: Intent = Intent(this, MainScreenActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
@@ -126,7 +126,7 @@ class AddingReminderActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent: Intent = Intent(this, MainActivity::class.java)
+        val intent: Intent = Intent(this, MainScreenActivity::class.java)
         startActivity(intent)
         finish()
     }

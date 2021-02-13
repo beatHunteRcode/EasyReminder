@@ -2,7 +2,6 @@ package com.beathunter.easyreminder.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,12 +29,12 @@ class MyRemindersActivity : AppCompatActivity() {
         val linearLayoutManager : LinearLayoutManager = LinearLayoutManager(this)
         remsList.layoutManager = linearLayoutManager
 
-        remindingsFile = File(MainActivity.FILE_PATH)
+        remindingsFile = File(MainScreenActivity.FILE_PATH)
 
-        remsAdapter = RemindersAdapter(
-            remindingsFile,
-            this
-        )
+//        remsAdapter = RemindersAdapter(
+//            remindingsFile,
+//            this
+//        )
         remsList.adapter = remsAdapter
 
         floatingActionButton.setOnClickListener {
@@ -47,7 +46,7 @@ class MyRemindersActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent: Intent = Intent(this, MainActivity::class.java)
+        val intent: Intent = Intent(this, MainScreenActivity::class.java)
         startActivity(intent)
         finish()
     }

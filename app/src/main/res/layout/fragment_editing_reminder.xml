@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/cyberpunkBackground1">
+    android:background="@color/cyberpunkBackground1"
+    tools:context=".Fragments.EditingReminderFragment"
+    android:tag="@string/Editing_Reminder_Fragment_Tag">
 
     <LinearLayout
         android:id="@+id/lin1"
@@ -35,7 +36,6 @@
             android:layout_marginTop="30dp"
             android:layout_weight="0"
             android:background="@drawable/buttonshape"
-            android:onClick="onSelectDateButtonClick"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -52,7 +52,6 @@
             android:layout_marginTop="30dp"
             android:layout_weight="0"
             android:background="@drawable/buttonshape"
-            android:onClick="onSelectTimeButtonClick"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -78,7 +77,6 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/buttonshape"
-            android:onClick="onRemoveButtonClick"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -95,7 +93,6 @@
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@drawable/buttonshape"
-            android:onClick="onSaveButtonClick"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -104,6 +101,5 @@
             android:textColor="#000000"
             android:textSize="30sp" />
     </LinearLayout>
-
 
 </LinearLayout>

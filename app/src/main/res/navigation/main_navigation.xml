@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainScreenFragment">
+
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.beathunter.easyreminder.Fragments.MainScreenFragment"
+        android:label="fragment_main_screen"
+        tools:layout="@layout/fragment_main_screen">
+        <action
+            android:id="@+id/action_mainScreenFragment_to_addingReminderFragment"
+            app:destination="@id/addingReminderFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_myRemindersFragment"
+            app:destination="@id/myRemindersFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_editingReminderFragment"
+            app:destination="@id/editingReminderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addingReminderFragment"
+        android:name="com.beathunter.easyreminder.Fragments.AddingReminderFragment"
+        android:label="fragment_adding_reminder"
+        tools:layout="@layout/fragment_adding_reminder" >
+        <action
+            android:id="@+id/action_addingReminderFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myRemindersFragment"
+        android:name="com.beathunter.easyreminder.Fragments.MyRemindersFragment"
+        android:label="fragment_my_reminders"
+        tools:layout="@layout/fragment_my_reminders" >
+        <action
+            android:id="@+id/action_myRemindersFragment_to_editingReminderFragment"
+            app:destination="@id/editingReminderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editingReminderFragment"
+        android:name="com.beathunter.easyreminder.Fragments.EditingReminderFragment"
+        android:label="fragment_editing_reminder"
+        tools:layout="@layout/fragment_editing_reminder" >
+        <action
+            android:id="@+id/action_editingReminderFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
+        <action
+            android:id="@+id/action_editingReminderFragment_to_myRemindersFragment"
+            app:destination="@id/myRemindersFragment" />
+    </fragment>
+</navigation>

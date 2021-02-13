@@ -11,7 +11,7 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.IBinder
 
-import com.beathunter.easyreminder.Activities.MainActivity
+import com.beathunter.easyreminder.Activities.MainScreenActivity
 import com.beathunter.easyreminder.Reminder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +27,7 @@ class ReminderService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        val arrRems = MainActivity.arrReminders
+        val arrRems = MainScreenActivity.arrReminders
         scope.launch {
             while (true) {
                 val currentMillis = System.currentTimeMillis()

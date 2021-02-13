@@ -34,7 +34,6 @@ class ImageLoadService : Service() {
             downloadedImageIntent.putExtra("image_path", path)
             downloadedImageIntent.action = BROADCAST_ACTION
             sendBroadcast(downloadedImageIntent)
-            stopSelf(startId)
         }
 
         return START_NOT_STICKY

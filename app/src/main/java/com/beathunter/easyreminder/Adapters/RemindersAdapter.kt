@@ -1,13 +1,13 @@
 package com.beathunter.easyreminder.Adapters
 
 import android.content.Context
-import android.content.Intent
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.beathunter.easyreminder.Activities.EditingReminderActivity
 import com.beathunter.easyreminder.QuickSort
 import com.beathunter.easyreminder.R
 import com.beathunter.easyreminder.Reminder
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.File
 
-class RemindersAdapter(remsFile: File, context: Context) :
+class RemindersAdapter(v: View, remsFile: File, context: Context) :
     RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder>() {
 
     private var numbElements = 0
@@ -31,6 +31,13 @@ class RemindersAdapter(remsFile: File, context: Context) :
 
     private var i = 0
     var parentContext : Context
+    var mainView : View
+    private var type : Int = 0
+
+    constructor(v: View, remsFile: File, typeOfRecyclerView: Int, context: Context) : this(v, remsFile, context) {
+        type = typeOfRecyclerView
+        numbElements = if (sortedArrRems.size < 5) sortedArrRems.size else 5
+    }
 
     init {
         //инициализация JSON-парсера
@@ -59,19 +66,30 @@ class RemindersAdapter(remsFile: File, context: Context) :
         numbElements = sortedArrRems.size
 
         parentContext = context
+        mainView = v
+
     }
+
 
     //создаем n-ое количество ViewHolder'ов
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RemindersViewHolder {
         val context : Context = parent.context
-        val layoutId = R.layout.rem_list_item
+        var layoutId : Int
+        if (type == 1) {
+            if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                layoutId = R.layout.near_rem_list_item_portrait
+            else layoutId = R.layout.near_rem_list_item_landscape
+        }
+        else layoutId = R.layout.rem_list_item
 
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(layoutId, parent, false)
 
         val viewHolder : RemindersViewHolder =
             RemindersViewHolder(
+                this.mainView,
                 view,
+                type,
                 parentContext
             )
         viewHolder.dateTV.text = "date"
@@ -95,7 +113,7 @@ class RemindersAdapter(remsFile: File, context: Context) :
     }
 
     //обёртка для элемента списка
-    class RemindersViewHolder(itemView: View, parentContext: Context) : RecyclerView.ViewHolder(itemView) {
+    class RemindersViewHolder(v: View, itemView: View, type : Int, parentContext: Context) : RecyclerView.ViewHolder(itemView) {
 
         var dateTV : TextView = itemView.findViewById(R.id.tv_date)
         var timeTV : TextView = itemView.findViewById(R.id.tv_time)
@@ -106,8 +124,8 @@ class RemindersAdapter(remsFile: File, context: Context) :
                 EditingReminderViewModel.setDateButtonText(dateTV.text.toString())
                 EditingReminderViewModel.setTimeButtonText(timeTV.text.toString())
                 EditingReminderViewModel.setRemindingText(textTV.text.toString())
-                val intent = Intent(parentContext, EditingReminderActivity::class.java)
-                parentContext.startActivity(intent)
+                if (type == 1) Navigation.findNavController(v).navigate(R.id.action_mainScreenFragment_to_editingReminderFragment)
+                else Navigation.findNavController(v).navigate(R.id.action_myRemindersFragment_to_editingReminderFragment)
             }
         }
         //юзается для многократного обновления одного и того же элемента

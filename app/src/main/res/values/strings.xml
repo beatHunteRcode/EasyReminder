@@ -2,4 +2,8 @@
     <string name="app_name">EasyReminder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Main_Screen_Fragment_Tag">MAIN_SCREEN_FRAGMENT</string>
+    <string name="My_Reminders_Fragment_Tag">MY_REMINDERS_FRAGMENT</string>
+    <string name="Adding_Reminder_Fragment_Tag">ADDING_REMINDER_FRAGMENT</string>
+    <string name="Editing_Reminder_Fragment_Tag">EDITING_REMINDER_FRAGMENT</string>
 </resources>
