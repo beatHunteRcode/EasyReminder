@@ -414,9 +414,9 @@ D/Broadcastyyy: Answer received. Received path: /data/user/0/com.beathunter.easy
 
 ## Приложение
 - Классы
-    - [ImageLoadServiceActivity.kt](ya.ru)
-    - [ImageLoadService.kt](ya.ru)
-    - [MainActivity.kt](ya.ru) (broadcast-receiver aka приложение-"болванка")
+    - [ImageLoadServiceActivity.kt](https://github.com/beatHunteRcode/EasyReminder/blob/master/app/src/main/java/com/beathunter/easyreminder/Activities/ImageLoadServiceActivity.kt)
+    - [ImageLoadService.kt](https://github.com/beatHunteRcode/EasyReminder/blob/master/app/src/main/java/com/beathunter/easyreminder/Services/ImageLoadService.kt)
+    - [MainActivity.kt](https://github.com/beatHunteRcode/EasyReminder/blob/master/app/src/main/java/com/beathunter/easyreminder/Activities/MainActivity.kt)
 - XML
-    - [service_activity.xml](ya.ru)
-    - [activity_main.xml](ya.ru) (broadcast-receiver aka приложение-"болванка")
+    - [service_activity.xml](https://github.com/beatHunteRcode/EasyReminder/blob/master/app/src/main/res/layout/service_activity.xml)
+    - [activity_main.xml](https://github.com/beatHunteRcode/EasyReminder/blob/master/app/src/main/res/layout/activity_main.xml) (broadcast-receiver aka приложение-"болванка")
